@@ -1,0 +1,32 @@
+{
+  "t1_crear_pedido_completo": {
+    "repeticiones": 100,
+    "tiempo_total_segundos": 1.3405,
+    "tiempo_promedio_ms": 13.405,
+    "transacciones_por_segundo": 74.6
+  },
+  "t2_actualizar_stock_venta": {
+    "repeticiones": 100,
+    "tiempo_total_segundos": 0.8484,
+    "tiempo_promedio_ms": 8.484,
+    "transacciones_por_segundo": 117.87
+  },
+  "t3_cancelar_pedido": {
+    "repeticiones": 100,
+    "tiempo_total_segundos": 0.8021,
+    "tiempo_promedio_ms": 8.021,
+    "transacciones_por_segundo": 124.68
+  },
+  "t4_descuento_categoria": {
+    "repeticiones": 100,
+    "tiempo_total_segundos": 1.2809,
+    "tiempo_promedio_ms": 12.809,
+    "transacciones_por_segundo": 78.07
+  },
+  "t5_alta_cliente_direccion": {
+    "repeticiones": 100,
+    "tiempo_total_segundos": 0.7442,
+    "tiempo_promedio_ms": 7.442,
+    "transacciones_por_segundo": 134.38
+  }
+}

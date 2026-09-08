@@ -1,0 +1,5 @@
+faker
+mysql-connector-python
+psycopg2-binary
+matplotlib
+pandas

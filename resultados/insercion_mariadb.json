@@ -1,0 +1,207 @@
+[
+  {
+    "motor": "mariadb",
+    "volumen_objetivo": 1000,
+    "total_registros_insertados": 7050,
+    "tiempo_total_segundos": 3.6142,
+    "registros_por_segundo": 1950.65,
+    "detalle_por_tabla": {
+      "categorias": {
+        "registros": 50,
+        "segundos": 0.0154
+      },
+      "proveedores": {
+        "registros": 1000,
+        "segundos": 0.1804
+      },
+      "productos": {
+        "registros": 1000,
+        "segundos": 0.0631
+      },
+      "clientes": {
+        "registros": 1000,
+        "segundos": 0.0639
+      },
+      "direcciones": {
+        "registros": 1000,
+        "segundos": 0.0631
+      },
+      "pedidos": {
+        "registros": 1000,
+        "segundos": 0.0818
+      },
+      "detalle_pedidos": {
+        "registros": 1000,
+        "segundos": 0.0444
+      },
+      "pagos": {
+        "registros": 1000,
+        "segundos": 0.0566
+      }
+    }
+  },
+  {
+    "motor": "mariadb",
+    "volumen_objetivo": 10000,
+    "total_registros_insertados": 63050,
+    "tiempo_total_segundos": 6.5027,
+    "registros_por_segundo": 9695.95,
+    "detalle_por_tabla": {
+      "categorias": {
+        "registros": 50,
+        "segundos": 0.0086
+      },
+      "proveedores": {
+        "registros": 3000,
+        "segundos": 0.1798
+      },
+      "productos": {
+        "registros": 10000,
+        "segundos": 0.5469
+      },
+      "clientes": {
+        "registros": 10000,
+        "segundos": 0.5377
+      },
+      "direcciones": {
+        "registros": 10000,
+        "segundos": 0.5452
+      },
+      "pedidos": {
+        "registros": 10000,
+        "segundos": 0.5922
+      },
+      "detalle_pedidos": {
+        "registros": 10000,
+        "segundos": 0.4765
+      },
+      "pagos": {
+        "registros": 10000,
+        "segundos": 0.5856
+      }
+    }
+  },
+  {
+    "motor": "mariadb",
+    "volumen_objetivo": 100000,
+    "total_registros_insertados": 550050,
+    "tiempo_total_segundos": 28.4007,
+    "registros_por_segundo": 19367.46,
+    "detalle_por_tabla": {
+      "categorias": {
+        "registros": 50,
+        "segundos": 0.01
+      },
+      "proveedores": {
+        "registros": 3000,
+        "segundos": 0.1332
+      },
+      "productos": {
+        "registros": 47000,
+        "segundos": 2.1756
+      },
+      "clientes": {
+        "registros": 100000,
+        "segundos": 3.9304
+      },
+      "direcciones": {
+        "registros": 100000,
+        "segundos": 4.3451
+      },
+      "pedidos": {
+        "registros": 100000,
+        "segundos": 4.9532
+      },
+      "detalle_pedidos": {
+        "registros": 100000,
+        "segundos": 4.2063
+      },
+      "pagos": {
+        "registros": 100000,
+        "segundos": 4.3258
+      }
+    }
+  },
+  {
+    "motor": "mariadb",
+    "volumen_objetivo": 500000,
+    "total_registros_insertados": 1150050,
+    "tiempo_total_segundos": 56.1737,
+    "registros_por_segundo": 20473.11,
+    "detalle_por_tabla": {
+      "categorias": {
+        "registros": 50,
+        "segundos": 0.0074
+      },
+      "proveedores": {
+        "registros": 3000,
+        "segundos": 0.1222
+      },
+      "productos": {
+        "registros": 47000,
+        "segundos": 2.176
+      },
+      "clientes": {
+        "registros": 150000,
+        "segundos": 5.6006
+      },
+      "direcciones": {
+        "registros": 150000,
+        "segundos": 6.6574
+      },
+      "pedidos": {
+        "registros": 250000,
+        "segundos": 13.1864
+      },
+      "detalle_pedidos": {
+        "registros": 300000,
+        "segundos": 12.7681
+      },
+      "pagos": {
+        "registros": 250000,
+        "segundos": 9.3971
+      }
+    }
+  },
+  {
+    "motor": "mariadb",
+    "volumen_objetivo": null,
+    "total_registros_insertados": 1150050,
+    "tiempo_total_segundos": 54.3263,
+    "registros_por_segundo": 21169.31,
+    "detalle_por_tabla": {
+      "categorias": {
+        "registros": 50,
+        "segundos": 0.0106
+      },
+      "proveedores": {
+        "registros": 3000,
+        "segundos": 0.1279
+      },
+      "productos": {
+        "registros": 47000,
+        "segundos": 2.1181
+      },
+      "clientes": {
+        "registros": 150000,
+        "segundos": 5.8596
+      },
+      "direcciones": {
+        "registros": 150000,
+        "segundos": 6.8933
+      },
+      "pedidos": {
+        "registros": 250000,
+        "segundos": 12.803
+      },
+      "detalle_pedidos": {
+        "registros": 300000,
+        "segundos": 12.6859
+      },
+      "pagos": {
+        "registros": 250000,
+        "segundos": 10.8674
+      }
+    }
+  }
+]

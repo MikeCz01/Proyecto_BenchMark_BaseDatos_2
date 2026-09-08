@@ -1,0 +1,66 @@
+{
+  "basicas": {
+    "b1_select_por_pk": {
+      "promedio_segundos": 0.00188,
+      "min_segundos": 0.00101,
+      "max_segundos": 0.00521,
+      "repeticiones": 5
+    },
+    "b2_select_where_indexado": {
+      "promedio_segundos": 0.00807,
+      "min_segundos": 0.00668,
+      "max_segundos": 0.01084,
+      "repeticiones": 5
+    },
+    "b3_busqueda_texto": {
+      "promedio_segundos": 0.01224,
+      "min_segundos": 0.00896,
+      "max_segundos": 0.02028,
+      "repeticiones": 5
+    },
+    "b4_orden_y_limite": {
+      "promedio_segundos": 0.01871,
+      "min_segundos": 0.01643,
+      "max_segundos": 0.02061,
+      "repeticiones": 5
+    },
+    "b5_agregacion_simple": {
+      "promedio_segundos": 0.06194,
+      "min_segundos": 0.05507,
+      "max_segundos": 0.08058,
+      "repeticiones": 5
+    }
+  },
+  "complejas": {
+    "c1_join_simple": {
+      "promedio_segundos": 0.01085,
+      "min_segundos": 0.00854,
+      "max_segundos": 0.01196,
+      "repeticiones": 5
+    },
+    "c2_join_multiple_top_clientes": {
+      "promedio_segundos": 0.88005,
+      "min_segundos": 0.77711,
+      "max_segundos": 1.14727,
+      "repeticiones": 5
+    },
+    "c3_subconsulta_productos_sin_ventas": {
+      "promedio_segundos": 0.05446,
+      "min_segundos": 0.03927,
+      "max_segundos": 0.09546,
+      "repeticiones": 5
+    },
+    "c4_join_having_clientes_frecuentes": {
+      "promedio_segundos": 0.35079,
+      "min_segundos": 0.25684,
+      "max_segundos": 0.44373,
+      "repeticiones": 5
+    },
+    "c5_ventas_por_categoria": {
+      "promedio_segundos": 0.23208,
+      "min_segundos": 0.20902,
+      "max_segundos": 0.2432,
+      "repeticiones": 5
+    }
+  }
+}

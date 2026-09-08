@@ -1,0 +1,40 @@
+{
+  "motor": "mariadb",
+  "etiqueta_volumen": "completo",
+  "total_mb": 157.78,
+  "total_gb": 0.1541,
+  "detalle_por_tabla_mb": {
+    "productos": {
+      "datos_bytes": 4.516,
+      "indices_bytes": 7.547
+    },
+    "clientes": {
+      "datos_bytes": 15.516,
+      "indices_bytes": 12.562
+    },
+    "pagos": {
+      "datos_bytes": 14.516,
+      "indices_bytes": 15.547
+    },
+    "pedidos": {
+      "datos_bytes": 13.516,
+      "indices_bytes": 22.062
+    },
+    "proveedores": {
+      "datos_bytes": 0.375,
+      "indices_bytes": 0.0
+    },
+    "direcciones": {
+      "datos_bytes": 18.547,
+      "indices_bytes": 3.516
+    },
+    "categorias": {
+      "datos_bytes": 0.016,
+      "indices_bytes": 0.0
+    },
+    "detalle_pedidos": {
+      "datos_bytes": 14.516,
+      "indices_bytes": 15.031
+    }
+  }
+}
