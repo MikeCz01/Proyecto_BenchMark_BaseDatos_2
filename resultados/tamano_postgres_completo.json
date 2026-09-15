@@ -1,8 +1,8 @@
 {
   "motor": "postgres",
   "etiqueta_volumen": "completo",
-  "total_mb": 196.57,
-  "total_gb": 0.192,
+  "total_mb": 196.69,
+  "total_gb": 0.1921,
   "detalle_por_tabla_mb": {
     "categorias": {
       "datos_bytes": 0.008,
@@ -13,28 +13,28 @@
       "indices_bytes": 0.117
     },
     "productos": {
-      "datos_bytes": 5.023,
-      "indices_bytes": 5.633
+      "datos_bytes": 5.031,
+      "indices_bytes": 5.75
     },
     "clientes": {
-      "datos_bytes": 16.062,
-      "indices_bytes": 17.719
+      "datos_bytes": 16.086,
+      "indices_bytes": 17.742
     },
     "direcciones": {
       "datos_bytes": 18.328,
       "indices_bytes": 7.383
     },
     "pedidos": {
-      "datos_bytes": 17.859,
-      "indices_bytes": 24.891
+      "datos_bytes": 17.867,
+      "indices_bytes": 24.875
     },
     "detalle_pedidos": {
       "datos_bytes": 17.25,
       "indices_bytes": 18.367
     },
     "pagos": {
-      "datos_bytes": 19.438,
-      "indices_bytes": 20.297
+      "datos_bytes": 19.445,
+      "indices_bytes": 20.367
     }
   }
 }

@@ -33,7 +33,7 @@ CONSULTAS_COMPLEJAS = {
     "c1_join_simple": """
         SELECT p.id, c.nombre, c.apellido, p.total
         FROM pedidos p
-        JOIN clientes c ON p.cliente_id = c.id
+        INNER JOIN clientes c ON p.cliente_id = c.id
         WHERE p.estado = 'entregado'
         LIMIT 1000
     """,
@@ -41,8 +41,8 @@ CONSULTAS_COMPLEJAS = {
     "c2_join_multiple_top_clientes": """
         SELECT c.id, c.nombre, COUNT(dp.id) AS items, SUM(dp.subtotal) AS total_gastado
         FROM clientes c
-        JOIN pedidos p ON p.cliente_id = c.id
-        JOIN detalle_pedidos dp ON dp.pedido_id = p.id
+        INNER JOIN pedidos p ON p.cliente_id = c.id
+        INNER JOIN detalle_pedidos dp ON dp.pedido_id = p.id
         GROUP BY c.id, c.nombre
         ORDER BY total_gastado DESC
         LIMIT 100
@@ -60,7 +60,7 @@ CONSULTAS_COMPLEJAS = {
     "c4_join_having_clientes_frecuentes": """
         SELECT c.id, c.nombre, COUNT(p.id) AS num_pedidos
         FROM clientes c
-        JOIN pedidos p ON p.cliente_id = c.id
+        INNER JOIN pedidos p ON p.cliente_id = c.id
         GROUP BY c.id, c.nombre
         HAVING COUNT(p.id) > 3
         ORDER BY num_pedidos DESC
@@ -70,9 +70,9 @@ CONSULTAS_COMPLEJAS = {
     "c5_ventas_por_categoria": """
         SELECT cat.nombre AS categoria, COUNT(dp.id) AS items_vendidos, SUM(dp.subtotal) AS total_vendido
         FROM categorias cat
-        JOIN productos pr ON pr.categoria_id = cat.id
-        JOIN detalle_pedidos dp ON dp.producto_id = pr.id
-        JOIN pedidos p ON p.id = dp.pedido_id
+        INNER JOIN productos pr ON pr.categoria_id = cat.id
+        INNER JOIN detalle_pedidos dp ON dp.producto_id = pr.id
+        INNER JOIN pedidos p ON p.id = dp.pedido_id
         WHERE p.estado != 'cancelado'
         GROUP BY cat.id, cat.nombre
         ORDER BY total_vendido DESC

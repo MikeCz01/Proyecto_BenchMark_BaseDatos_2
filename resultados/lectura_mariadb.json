@@ -1,65 +1,65 @@
 {
   "basicas": {
     "b1_select_por_pk": {
-      "promedio_segundos": 0.00204,
-      "min_segundos": 0.00123,
-      "max_segundos": 0.00404,
+      "promedio_segundos": 0.00074,
+      "min_segundos": 0.00061,
+      "max_segundos": 0.00084,
       "repeticiones": 5
     },
     "b2_select_where_indexado": {
-      "promedio_segundos": 0.0241,
-      "min_segundos": 0.01627,
-      "max_segundos": 0.0432,
+      "promedio_segundos": 0.00656,
+      "min_segundos": 0.00362,
+      "max_segundos": 0.01231,
       "repeticiones": 5
     },
     "b3_busqueda_texto": {
-      "promedio_segundos": 0.00981,
-      "min_segundos": 0.00866,
-      "max_segundos": 0.01144,
+      "promedio_segundos": 0.00258,
+      "min_segundos": 0.00237,
+      "max_segundos": 0.0029,
       "repeticiones": 5
     },
     "b4_orden_y_limite": {
-      "promedio_segundos": 0.01905,
-      "min_segundos": 0.01761,
-      "max_segundos": 0.0204,
+      "promedio_segundos": 0.00508,
+      "min_segundos": 0.00486,
+      "max_segundos": 0.0053,
       "repeticiones": 5
     },
     "b5_agregacion_simple": {
-      "promedio_segundos": 0.28225,
-      "min_segundos": 0.26207,
-      "max_segundos": 0.33819,
+      "promedio_segundos": 0.10239,
+      "min_segundos": 0.09979,
+      "max_segundos": 0.10512,
       "repeticiones": 5
     }
   },
   "complejas": {
     "c1_join_simple": {
-      "promedio_segundos": 0.01799,
-      "min_segundos": 0.01431,
-      "max_segundos": 0.02288,
+      "promedio_segundos": 0.00343,
+      "min_segundos": 0.00298,
+      "max_segundos": 0.00468,
       "repeticiones": 5
     },
     "c2_join_multiple_top_clientes": {
-      "promedio_segundos": 6.91548,
-      "min_segundos": 6.79024,
-      "max_segundos": 7.02768,
+      "promedio_segundos": 1.99512,
+      "min_segundos": 1.97398,
+      "max_segundos": 2.03651,
       "repeticiones": 5
     },
     "c3_subconsulta_productos_sin_ventas": {
-      "promedio_segundos": 0.18847,
-      "min_segundos": 0.15578,
-      "max_segundos": 0.21301,
+      "promedio_segundos": 0.03676,
+      "min_segundos": 0.0355,
+      "max_segundos": 0.03958,
       "repeticiones": 5
     },
     "c4_join_having_clientes_frecuentes": {
-      "promedio_segundos": 4.53202,
-      "min_segundos": 4.37117,
-      "max_segundos": 4.63834,
+      "promedio_segundos": 1.45608,
+      "min_segundos": 1.45077,
+      "max_segundos": 1.46861,
       "repeticiones": 5
     },
     "c5_ventas_por_categoria": {
-      "promedio_segundos": 2.27656,
-      "min_segundos": 2.17296,
-      "max_segundos": 2.40564,
+      "promedio_segundos": 0.51308,
+      "min_segundos": 0.51021,
+      "max_segundos": 0.51892,
       "repeticiones": 5
     }
   }
