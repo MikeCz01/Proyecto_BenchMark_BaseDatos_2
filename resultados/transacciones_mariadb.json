@@ -1,32 +1,64 @@
 {
   "t1_crear_pedido_completo": {
     "repeticiones": 100,
-    "tiempo_total_segundos": 1.3405,
-    "tiempo_promedio_ms": 13.405,
-    "transacciones_por_segundo": 74.6
+    "exitosas": 100,
+    "errores": 0,
+    "tiempo_total_segundos": 0.5044,
+    "tiempo_promedio_ms": 5.044,
+    "transacciones_por_segundo": 198.26,
+    "queries": [
+      "INSERT INTO pedidos (cliente_id, direccion_id, fecha_pedido, estado, total) VALUES (29185, 6557, NOW(), 'pendiente', 0)",
+      "INSERT INTO detalle_pedidos (pedido_id, producto_id, cantidad, precio_unitario, subtotal) VALUES (250401, 18025, 2, 119.37, 238.74)",
+      "INSERT INTO detalle_pedidos (pedido_id, producto_id, cantidad, precio_unitario, subtotal) VALUES (250401, 6718, 5, 52.6, 263.0)",
+      "UPDATE pedidos SET total = 501.74 WHERE id = 250401",
+      "INSERT INTO pagos (pedido_id, metodo_pago, monto, fecha_pago, estado) VALUES (250401, 'tarjeta_credito', 501.74, NOW(), 'completado')"
+    ]
   },
   "t2_actualizar_stock_venta": {
     "repeticiones": 100,
-    "tiempo_total_segundos": 0.8484,
-    "tiempo_promedio_ms": 8.484,
-    "transacciones_por_segundo": 117.87
+    "exitosas": 100,
+    "errores": 0,
+    "tiempo_total_segundos": 0.3312,
+    "tiempo_promedio_ms": 3.312,
+    "transacciones_por_segundo": 301.97,
+    "queries": [
+      "SELECT stock FROM productos WHERE id = 17344",
+      "UPDATE productos SET stock = 3154 WHERE id = 17344"
+    ]
   },
   "t3_cancelar_pedido": {
     "repeticiones": 100,
-    "tiempo_total_segundos": 0.8021,
-    "tiempo_promedio_ms": 8.021,
-    "transacciones_por_segundo": 124.68
+    "exitosas": 100,
+    "errores": 0,
+    "tiempo_total_segundos": 0.1773,
+    "tiempo_promedio_ms": 1.773,
+    "transacciones_por_segundo": 564.06,
+    "queries": [
+      "UPDATE pedidos SET estado = 'cancelado' WHERE id = 62602",
+      "UPDATE pagos SET estado = 'rechazado' WHERE pedido_id = 62602"
+    ]
   },
   "t4_descuento_categoria": {
     "repeticiones": 100,
-    "tiempo_total_segundos": 1.2809,
-    "tiempo_promedio_ms": 12.809,
-    "transacciones_por_segundo": 78.07
+    "exitosas": 100,
+    "errores": 0,
+    "tiempo_total_segundos": 0.4379,
+    "tiempo_promedio_ms": 4.379,
+    "transacciones_por_segundo": 228.34,
+    "queries": [
+      "UPDATE productos SET precio = ROUND(precio * 0.9, 2) WHERE categoria_id = 10"
+    ]
   },
   "t5_alta_cliente_direccion": {
     "repeticiones": 100,
-    "tiempo_total_segundos": 0.7442,
-    "tiempo_promedio_ms": 7.442,
-    "transacciones_por_segundo": 134.38
+    "exitosas": 100,
+    "errores": 0,
+    "tiempo_total_segundos": 0.3316,
+    "tiempo_promedio_ms": 3.316,
+    "transacciones_por_segundo": 301.57,
+    "queries": [
+      "INSERT INTO clientes (nombre, apellido, email, telefono, fecha_registro) VALUES ('Cliente', 'Prueba', 'cliente_tx_a210c4d0ba2849a0a20765c48469ab34@ejemplo.com', '00000000', NOW())",
+      "INSERT INTO direcciones (cliente_id, calle, ciudad, departamento, codigo_postal, pais) VALUES (150401, 'Calle de prueba', 'Ciudad de prueba', 'Depto Prueba', '00000', 'Honduras')"
+    ]
   }
 }

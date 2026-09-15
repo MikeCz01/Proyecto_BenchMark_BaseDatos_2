@@ -3,6 +3,7 @@ import json
 import os
 import random
 import time
+import uuid
 import mysql.connector
 import psycopg2
 from config import MARIADB_CONFIG, POSTGRES_CONFIG
@@ -27,6 +28,40 @@ def conectar(motor):
     return conn
 
 
+class CursorTrazador:
+    """Envuelve un cursor real y registra cada query con sus parámetros tal cual se ejecutó."""
+
+    def __init__(self, cursor, capturador):
+        self._cursor = cursor
+        self._capturador = capturador
+
+    def execute(self, query, params=None):
+        self._capturador.append((query, params))
+        return self._cursor.execute(query, params)
+
+    def __getattr__(self, nombre):
+        return getattr(self._cursor, nombre)
+
+
+def formatear_valor(valor):
+    if valor is None:
+        return "NULL"
+    if isinstance(valor, str):
+        return "'" + valor.replace("'", "''") + "'"
+    return str(valor)
+
+
+def renderizar_query(query, params):
+    """Reemplaza cada %s por el valor real que se usó, para mostrar la query final."""
+    if not params:
+        return query
+    partes = query.split("%s")
+    resultado = partes[0]
+    for valor, parte in zip(params, partes[1:]):
+        resultado += formatear_valor(valor) + parte
+    return resultado
+
+
 def obtener_id_insertado(cur, conn, motor, query, params, id_col="id"):
     """Ejecuta un INSERT y devuelve el ID autogenerado, sea MariaDB o Postgres."""
     if motor == "mariadb":
@@ -36,8 +71,8 @@ def obtener_id_insertado(cur, conn, motor, query, params, id_col="id"):
         cur.execute(query + f" RETURNING {id_col}", params)
         return cur.fetchone()[0]
 
-def tx_crear_pedido_completo(conn, motor, rng):
-    cur = conn.cursor()
+def tx_crear_pedido_completo(conn, motor, rng, fabricar_cursor=None):
+    cur = (fabricar_cursor or conn.cursor)()
     cliente_id = rng.randint(*RANGO_CLIENTES)
     direccion_id = rng.randint(*RANGO_DIRECCIONES)
 
@@ -72,8 +107,8 @@ def tx_crear_pedido_completo(conn, motor, rng):
     conn.commit()
     cur.close()
 
-def tx_actualizar_stock(conn, motor, rng):
-    cur = conn.cursor()
+def tx_actualizar_stock(conn, motor, rng, fabricar_cursor=None):
+    cur = (fabricar_cursor or conn.cursor)()
     producto_id = rng.randint(*RANGO_PRODUCTOS)
     cantidad_vendida = rng.randint(1, 3)
 
@@ -86,8 +121,8 @@ def tx_actualizar_stock(conn, motor, rng):
     conn.commit()
     cur.close()
 
-def tx_cancelar_pedido(conn, motor, rng):
-    cur = conn.cursor()
+def tx_cancelar_pedido(conn, motor, rng, fabricar_cursor=None):
+    cur = (fabricar_cursor or conn.cursor)()
     pedido_id = rng.randint(*RANGO_PEDIDOS)
 
     cur.execute("UPDATE pedidos SET estado = %s WHERE id = %s", ("cancelado", pedido_id))
@@ -96,8 +131,8 @@ def tx_cancelar_pedido(conn, motor, rng):
     conn.commit()
     cur.close()
 
-def tx_descuento_categoria(conn, motor, rng):
-    cur = conn.cursor()
+def tx_descuento_categoria(conn, motor, rng, fabricar_cursor=None):
+    cur = (fabricar_cursor or conn.cursor)()
     categoria_id = rng.randint(*RANGO_CATEGORIAS)
     porcentaje = rng.choice([0.90, 0.95, 0.85])  # 10%, 5% o 15% de descuento
 
@@ -109,9 +144,11 @@ def tx_descuento_categoria(conn, motor, rng):
     cur.close()
 
 
-def tx_alta_cliente(conn, motor, rng):
-    cur = conn.cursor()
-    sufijo = rng.randint(1_000_000, 9_999_999)
+def tx_alta_cliente(conn, motor, rng, fabricar_cursor=None):
+    cur = (fabricar_cursor or conn.cursor)()
+    # uuid4 en vez de rng: el email debe ser único incluso entre corridas del
+    # benchmark, y rng usa una semilla fija (siempre genera la misma secuencia).
+    sufijo = uuid.uuid4().hex
 
     cliente_id = obtener_id_insertado(
         cur, conn, motor,
@@ -138,22 +175,39 @@ TRANSACCIONES = {
     "t5_alta_cliente_direccion": tx_alta_cliente,
 }
 
-
 def medir_transaccion(conn, motor, funcion, rng):
     tiempos = []
-    for _ in range(REPETICIONES):
+    errores = 0
+    queries_capturadas = []
+
+    for i in range(REPETICIONES):
         inicio = time.perf_counter()
-        funcion(conn, motor, rng)
+        try:
+            if i == 0:
+                capturador = []
+                queries_capturadas = capturador  # misma lista: se ve reflejado aunque falle a medio camino
+                funcion(conn, motor, rng, lambda: CursorTrazador(conn.cursor(), capturador))
+            else:
+                funcion(conn, motor, rng)
+        except Exception as e:
+            conn.rollback()
+            errores += 1
+            print(f"   ! rollback por error: {e}")
+            continue
         fin = time.perf_counter()
         tiempos.append(fin - inicio)
 
     tiempo_total = sum(tiempos)
-    return {
+    exitosas = len(tiempos)
+    resultado = {
         "repeticiones": REPETICIONES,
+        "exitosas": exitosas,
+        "errores": errores,
         "tiempo_total_segundos": round(tiempo_total, 4),
-        "tiempo_promedio_ms": round((tiempo_total / REPETICIONES) * 1000, 3),
-        "transacciones_por_segundo": round(REPETICIONES / tiempo_total, 2),
+        "tiempo_promedio_ms": round((tiempo_total / exitosas) * 1000, 3) if exitosas else None,
+        "transacciones_por_segundo": round(exitosas / tiempo_total, 2) if tiempo_total else None,
     }
+    return resultado, [renderizar_query(q, p) for q, p in queries_capturadas]
 
 
 def main():
@@ -169,10 +223,14 @@ def main():
 
     resultados = {}
     for nombre, funcion in TRANSACCIONES.items():
-        print(f"-> {nombre}...")
-        r = medir_transaccion(conn, args.motor, funcion, rng)
+        r, queries = medir_transaccion(conn, args.motor, funcion, rng)
+        print("Transacciones:")
+        for q in queries:
+            print(q)
+
+        r["queries"] = queries
         resultados[nombre] = r
-        print(f"   TPS: {r['transacciones_por_segundo']} | "
+        print(f"TPS: {r['transacciones_por_segundo']} | "
               f"Promedio: {r['tiempo_promedio_ms']} ms | "
               f"Total: {r['tiempo_total_segundos']}s\n")
 

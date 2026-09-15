@@ -1,11 +1,12 @@
 motor,kpi,valor
-mariadb,InserciÃ³n mÃ¡x. (reg/s),21169.31
-mariadb,Lectura bÃ¡sicas prom. (s),0.06745
-mariadb,Lectura complejas prom. (s),2.7861
-mariadb,TPS promedio (transacciones),105.92
-mariadb,TamaÃ±o final BD (MB),157.78
-postgres,InserciÃ³n mÃ¡x. (reg/s),24093.16
-postgres,Lectura bÃ¡sicas prom. (s),0.02057
-postgres,Lectura complejas prom. (s),0.30565
-postgres,TPS promedio (transacciones),153.44
-postgres,TamaÃ±o final BD (MB),196.57
+mariadb,Inserción máx. (reg/s),74868.73
+mariadb,Lectura básicas prom. (s),0.02347
+mariadb,Lectura complejas prom. (s),0.80089
+mariadb,TPS promedio (transacciones),318.84
+mariadb,Tamaño final BD (MB),159.78
+,,
+postgres,Inserción máx. (reg/s),56946.02
+postgres,Lectura básicas prom. (s),0.00673
+postgres,Lectura complejas prom. (s),0.09821
+postgres,TPS promedio (transacciones),298.28
+postgres,Tamaño final BD (MB),196.69
